@@ -8,7 +8,7 @@
   <body>
     <h1>Profile</h1>
     <button onclick="location.href='/logout'">Logout</button>
-    <button onclick="location.href='/profile'">Logout</button>
+    <button onclick="location.href='/posts'">Posts</button>
     <form method="post">
       <section class="vh-100" style="background-color: #508bfc">
         <div class="container py-5 h-100">
@@ -24,17 +24,29 @@
                     <input
                       type="text"
                       id="username"
-                      class="form-control form-control-lg" />
+                      name="name"
+                      class="form-control form-control-lg" 
+                      <% if (data) { %>
+                        value="<%= data.name %>"/>
+                      <% } %>
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="typePasswordX-2"
-                      >Password</label
+                      >Gender</label
                     >
-                    <input
-                      type="password"
-                      id="typePasswordX-2"
-                      class="form-control form-control-lg" />
+                    <select name="gender">
+                      <% const gender = ['Female', 'Male'] %>
+                      <% if (data) { %>
+                        <% gender.forEach(e => { %>
+                          <option value="<%= e %>" <%= e === data.gender ? 'selected' : '' %> > <%= e %> </option>
+                        <% }) %>
+                      <% } else {%>
+                        <% gender.forEach(e => { %>
+                          <option value="<%= e %>"> <%= e %> </option>
+                        <% }) %>
+                        <% } %>
+                    </select>
                   </div>
 
                   <button

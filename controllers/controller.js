@@ -21,7 +21,7 @@ class Controller {
         const isPassword = bcrypt.compareSync(password, user.password);
         if (isPassword) {
           req.session.userId = user.id
-          return res.redirect("/profile");
+          return res.redirect(`/profile/${req.session.userId}`);
         } else {
           return res.redirect(`/login?message=incorrect userName/password`);
         }
@@ -77,14 +77,30 @@ class Controller {
   }
 
   static async profile(req, res) {
-    res.render("profileForm");
+    try {
+      const data = await Profile.findOne({
+        where: {UserId: req.session.userId}
+      })
+      res.render("profileForm", {data});
+    } catch (error) {
+      
+    }
   }
 
-  static async addProfile(req, res) {
-    const { userId } = req.params;
+  static async postProfile(req, res) {
+    const { userId } = req.session;
+    const { name, gender} = req.body
+    console.log(name, gender, userId)
     try {
-      const profile = await Profile.findByPk();
-      res.render("profileForm", { profile });
+      const user = await Profile.findOne({
+        where: {UserId: userId}
+      })
+      if (user) {
+        await Profile.update({name, gender}, {where: {UserId: userId}})
+      } else {
+        await Profile.create({name, gender, UserId: userId})
+      }
+      res.redirect(`/profile/${userId}`);
     } catch (error) {
       console.log(error);
       res.send(error.message);

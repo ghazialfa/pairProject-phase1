@@ -35,7 +35,8 @@ router.use(function (req, res, next) {
 router.get("/posts", Controller.post);
 
 router.get("/posts/:userId/create", Controller.createPost);
-router.get("/profile", Controller.profile);
+router.get("/profile/:id", Controller.profile);
+router.post("/profile/:id", Controller.postProfile);
 // router.get("/user/:userId");
 // router.get("/users/:userId/profile/:profileId");
 // router.get("/users/:userId/profile/add");
