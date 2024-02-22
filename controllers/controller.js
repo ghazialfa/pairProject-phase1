@@ -38,6 +38,16 @@ class Controller {
       }
     }
   }
+  static logout(req, res){
+    req.session.destroy((error)=>{
+      if (error) {
+        console.log(error)
+        res.send(error.message)
+      } else {
+        res.redirect('/login')
+      }
+    })
+  }
   static register(req, res) {
     try {
       const { message } = req.query;

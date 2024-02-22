@@ -14,7 +14,6 @@ app.use(session({
   cookie: { 
     secure: false,
     sameSite: true,
-    maxAge: 60000
   }
 }))
 app.use(router);
