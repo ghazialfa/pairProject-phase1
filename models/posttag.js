@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      PostTag.belongsTo(models.Post, { foreignKey: "PostId" });
+      PostTag.belongsTo(models.Tag, { foreignKey: "TagId" });
     }
   }
   PostTag.init(
