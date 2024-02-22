@@ -14,19 +14,25 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-router.get("/", (req, res) => {
-  res.redirect("/login");
-});
+// router.get("/login", (req, res) => {
+//   console.log(req.query)
+// });
 
-router.get("/login", Controller.login);
+// router.get("/login", Controller.login);
+// router.post("/login", Controller.validateLogin);
+// router.get("/register", Controller.register);
+// router.post("/register", Controller.postRegister);
+// router.get("/post", Controller.getPost);
+// router.use("/posts/create");
+// // router.use("/profile");
 router.get("/posts", Controller.post);
-router.get("/posts/create", Controller.createPost);
+router.get("/posts/:userId/create", Controller.createPost);
 router.get("/profile", Controller.profile);
-// router.use("/user/:userId");
-// router.use("/users/:userId/profile/:profileId");
-// router.use("/users/:userId/profile/add");
+// router.get("/user/:userId");
+// router.get("/users/:userId/profile/:profileId");
+// router.get("/users/:userId/profile/add");
 // router.post("/users/:userId/profile/add");
-// router.use("/users/:userId/profile/:profileId/edit");
+// router.get("/users/:userId/profile/:profileId/edit");
 // router.post("/users/:userId/profile/:profileId/edit");
 
 module.exports = router;
