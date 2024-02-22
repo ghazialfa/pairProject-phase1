@@ -1,6 +1,5 @@
 "use strict";
-<<<<<<< HEAD
-const { User } = require('../models')
+const { User, Post, sequelize, Sequelize } = require("../models");
 const bcrypt = require('bcryptjs');
 
 class Controller {
@@ -49,14 +48,6 @@ class Controller {
             res.send(error.message)
         }
     }
-}
-
-module.exports = Controller
-=======
-
-const { User, Post, sequelize, Sequelize } = require("../models");
-
-class Controller {
   static async login(req, res) {
     res.render("login");
   }
@@ -99,4 +90,3 @@ class Controller {
 }
 
 module.exports = Controller;
->>>>>>> c589a25 (correct models dll)
