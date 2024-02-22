@@ -9,6 +9,7 @@ router.get("/", (req, res) => {
 
 router.use("/login");
 router.use("/posts");
+router.use("/posts/create");
 // router.use("/profile");
 router.use("/user/:userId");
 router.use("/users/:userId/profile/:profileId");
