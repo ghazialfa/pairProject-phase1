@@ -21,7 +21,7 @@ class Controller {
         const isPassword = bcrypt.compareSync(password, user.password);
         if (isPassword) {
           req.session.userId = user.id
-          return res.redirect("/posts");
+          return res.redirect("/profile");
         } else {
           return res.redirect(`/login?message=incorrect userName/password`);
         }
