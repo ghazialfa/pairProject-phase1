@@ -18,14 +18,15 @@ const upload = multer({ storage: storage });
 //   console.log(req.query)
 // });
 
-// router.get("/login", Controller.login);
-// router.post("/login", Controller.validateLogin);
-// router.get("/register", Controller.register);
-// router.post("/register", Controller.postRegister);
+router.get("/login", Controller.login);
+router.post("/login", Controller.validateLogin);
+router.get("/register", Controller.register);
+router.post("/register", Controller.postRegister);
 // router.get("/post", Controller.getPost);
 // router.use("/posts/create");
 // // router.use("/profile");
 router.get("/posts", Controller.post);
+
 router.get("/posts/:userId/create", Controller.createPost);
 router.get("/profile", Controller.profile);
 // router.get("/user/:userId");
