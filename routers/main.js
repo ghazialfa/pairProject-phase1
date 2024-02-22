@@ -19,18 +19,15 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", Controller.login);
-<<<<<<< HEAD
 router.post("/login", Controller.validateLogin);
 router.get("/register", Controller.register);
 router.post("/register", Controller.postRegister);
 // router.get("/post", Controller.getPost);
 // router.use("/posts/create");
 // // router.use("/profile");
-=======
 router.get("/posts", Controller.post);
 router.get("/posts/create", Controller.createPost);
 router.get("/profile", Controller.profile);
->>>>>>> c589a25 (correct models dll)
 // router.use("/user/:userId");
 // router.use("/users/:userId/profile/:profileId");
 // router.use("/users/:userId/profile/add");
