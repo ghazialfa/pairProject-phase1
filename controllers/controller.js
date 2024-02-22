@@ -85,8 +85,8 @@ class Controller {
       // const posts = await Post.findAll();
       const posts = await Post.findAll({ include: "User" });
       // console.log(posts);
-      res.send(posts);
-      // res.render("post", { posts });
+      // res.send(posts);
+      res.render("post", { posts });
     } catch (error) {
       console.log(error);
       res.send(error.message);
