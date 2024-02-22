@@ -14,9 +14,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-router.get("/", (req, res) => {
-  res.redirect("/login");
-});
+// router.get("/login", (req, res) => {
+//   console.log(req.query)
+// });
 
 router.get("/login", Controller.login);
 router.post("/login", Controller.validateLogin);

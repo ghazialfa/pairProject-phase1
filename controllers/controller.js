@@ -1,11 +1,12 @@
 "use strict";
-const { User, Post, sequelize, Sequelize } = require("../models");
+const { User, Post } = require("../models");
 const bcrypt = require('bcryptjs');
 
 class Controller {
     static login(req, res){
         try {
-            res.render('login')
+            const { message } = req.query
+            res.render('login', {message})
         } catch (error) {
             console.log(error)
             res.send(error.message)
@@ -20,19 +21,27 @@ class Controller {
                 if (isPassword) {
                     return res.redirect('/post')
                 }else{
-                    return res.redirect('/login?error=incorrect user/password')
+                    return res.redirect(`/login?message=incorrect userName/password`)
                 }
             }else{
-                return res.redirect('/login?error=incorrect user/password')
+                return res.redirect('/login?message=incorrect userName/password')
             }
         } catch (error) {
+          if (
+            error.name === 'SequelizeValidationError'
+          ) {
+            const err = error.errors.map((e) => e.message)
+            res.redirect(`/login?message=${err}`)
+          } else {
             console.log(error)
             res.send(error.message)
+          }
         }
     }
     static register(req, res){
         try {
-            res.render('register')
+            const {message} = req.query
+            res.render('register', {message})
         } catch (error) {
             console.log(error)
             res.send(error.message)
@@ -44,13 +53,18 @@ class Controller {
             await User.create({userName, email, password})
             res.redirect('/login')
         } catch (error) {
+          if (
+            error.name === 'SequelizeUniqueConstraintError' ||
+            error.name === 'SequelizeValidationError'
+          ) {
+            const err = error.errors.map((e) => e.message)
+            res.redirect(`/register?message=${err}`)
+          } else {
             console.log(error)
             res.send(error.message)
+          }
         }
     }
-  static async login(req, res) {
-    res.render("login");
-  }
 
   static async profile(req, res) {
     res.render("profileForm");
@@ -66,7 +80,6 @@ class Controller {
       res.send(error.message);
     }
   }
-
   static async post(req, res) {
     try {
       // const posts = await Post.findAll();
