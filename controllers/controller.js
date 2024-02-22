@@ -83,7 +83,9 @@ class Controller {
   static async post(req, res) {
     try {
       // const posts = await Post.findAll();
-      const posts = await Post.findAll({ include: "User" });
+      const posts = await Post.findAll({
+        include: [{ model: Tag }, { model: User }],
+      });
       // console.log(posts);
       // res.send(posts);
       res.render("post", { posts });
@@ -94,7 +96,29 @@ class Controller {
   }
 
   static async createPost(req, res) {
+    const { userId } = req.params;
     try {
+      const user = await User.findByPk(userId);
+      const post = await Post.findAll();
+
+      res.render("addPost", { user, post });
+      // res.send(user);
+    } catch (error) {
+      console.log(error);
+      res.send(error.message);
+    }
+  }
+
+  static async savePost(req, res) {
+    const { userId } = req.params;
+    try {
+      const { title, content, tagId } = req.body;
+      await Post.creat({
+        title,
+        content,
+        tagId,
+      });
+      res.redirect(`/posts`);
     } catch (error) {
       console.log(error);
       res.send(error.message);

@@ -26,13 +26,13 @@ router.post("/register", Controller.postRegister);
 // router.use("/posts/create");
 // // router.use("/profile");
 router.get("/posts", Controller.post);
-router.get("/posts/create", Controller.createPost);
+router.get("/posts/:userId/create", Controller.createPost);
 router.get("/profile", Controller.profile);
-// router.use("/user/:userId");
-// router.use("/users/:userId/profile/:profileId");
-// router.use("/users/:userId/profile/add");
+// router.get("/user/:userId");
+// router.get("/users/:userId/profile/:profileId");
+// router.get("/users/:userId/profile/add");
 // router.post("/users/:userId/profile/add");
-// router.use("/users/:userId/profile/:profileId/edit");
+// router.get("/users/:userId/profile/:profileId/edit");
 // router.post("/users/:userId/profile/:profileId/edit");
 
 module.exports = router;
