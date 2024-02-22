@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Post.belongsTo(models.User, { foreignKey: "UserId" });
       Post.hasMany(models.PostTag, { foreignKey: "PostId" });
-      Post.belongsToMany(models.Tag, { through: models.PostTag,});
+      Post.belongsToMany(models.Tag, { through: models.PostTag });
     }
   }
   Post.init(
