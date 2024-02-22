@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       userName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        unique: true
       },
       email: {
         type: DataTypes.STRING,
@@ -29,13 +29,21 @@ module.exports = (sequelize, DataTypes) => {
       },
       role: {
         type: DataTypes.STRING,
+        defaultValue: 'user',
         allowNull: false,
-        defaultValue: "user",
       },
     },
     {
       sequelize,
       modelName: "User",
+      hooks: {beforeCreate: (instance, options) => {
+        const bcrypt = require('bcryptjs');
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(instance.password, salt);
+        console.log(hash)
+        instance.password = hash
+        }
+      }
     }
   );
   return User;
