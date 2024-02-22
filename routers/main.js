@@ -26,6 +26,7 @@ router.post("/register", Controller.postRegister);
 // router.use("/posts/create");
 // // router.use("/profile");
 router.get("/posts", Controller.post);
+
 router.get("/posts/:userId/create", Controller.createPost);
 router.get("/profile", Controller.profile);
 // router.get("/user/:userId");
