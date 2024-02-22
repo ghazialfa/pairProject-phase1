@@ -19,6 +19,7 @@ router.get("/", (req, res) => {
 });
 router.get("/login", Controller.login);
 router.post("/login", Controller.validateLogin);
+router.get("/logout", Controller.logout)
 router.get("/register", Controller.register);
 router.post("/register", Controller.postRegister);
 router.use(function (req, res, next) {
