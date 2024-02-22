@@ -14,14 +14,20 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// router.get("/login", (req, res) => {
-//   console.log(req.query)
-// });
-
+router.get("/", (req, res) => {
+  res.redirect("/login")
+});
 router.get("/login", Controller.login);
 router.post("/login", Controller.validateLogin);
 router.get("/register", Controller.register);
 router.post("/register", Controller.postRegister);
+router.use(function (req, res, next) {
+  if (!req.session.userId) {
+    res.redirect(`/login?message=${'Please Login'}`)
+  } else {
+    next()
+  }
+})
 // router.get("/post", Controller.getPost);
 // router.use("/posts/create");
 // // router.use("/profile");

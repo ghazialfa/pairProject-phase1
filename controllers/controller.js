@@ -1,6 +1,6 @@
 "use strict";
 
-const { User, Post } = require("../models");
+const { User, Post, Tag, Profile } = require("../models");
 const bcrypt = require("bcryptjs");
 
 class Controller {
@@ -20,7 +20,8 @@ class Controller {
       if (user) {
         const isPassword = bcrypt.compareSync(password, user.password);
         if (isPassword) {
-          return res.redirect("/post");
+          req.session.userId = user.id
+          return res.redirect("/posts");
         } else {
           return res.redirect(`/login?message=incorrect userName/password`);
         }
