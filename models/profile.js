@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Profile.belongsTo(models.User);
     }
+    getUserAge(){
+      const date = new Date(Date.now() - this.dateOfBirth.getTime()).getUTCFullYear()
+      return Math.abs(date-1970)
+    }
   }
   Profile.init(
     {
