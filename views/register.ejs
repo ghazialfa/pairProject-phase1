@@ -3,24 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>PP</title>
   </head>
   <body>
     <h1>Register</h1>
-    <div style="display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center">
       <% if (message) { %>
-        <p style="color: brown;"> <%= message %> </p>
-       <% } %>
+      <p style="color: brown"><%= message %></p>
+      <% } %>
     </div>
     <form method="post">
-      <section class="vh-100" style="background-color: #508bfc">
+      <section class="vh-100">
         <div class="container py-5 h-100">
           <div
             class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
               <div class="card shadow-2-strong" style="border-radius: 1rem">
                 <div class="card-body p-5 text-center">
-                  <h3 class="mb-5">Register</h3>
+                  <!-- <h3 class="mb-5">Register</h3> -->
 
                   <div class="form-outline mb-4">
                     <input
@@ -31,7 +32,7 @@
                       class="form-control form-control-lg" />
                     <label class="form-label" for="username">Username</label>
                   </div>
-                  
+
                   <div class="form-outline mb-4">
                     <input
                       required
@@ -59,8 +60,6 @@
                     type="submit">
                     Register
                   </button>
-
-                  <hr class="my-4" />
                 </div>
               </div>
             </div>

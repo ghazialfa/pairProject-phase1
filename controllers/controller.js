@@ -1,7 +1,7 @@
 "use strict";
 
 const { User, Post, Tag, Profile } = require("../models");
-const {formatDate} = require('../helpers/formatter')
+const { formatDate, time } = require("../helpers/formatter");
 const bcrypt = require("bcryptjs");
 
 class Controller {
@@ -21,7 +21,7 @@ class Controller {
       if (user) {
         const isPassword = bcrypt.compareSync(password, user.password);
         if (isPassword) {
-          req.session.userId = user.id
+          req.session.userId = user.id;
           return res.redirect(`/profile/${req.session.userId}`);
         } else {
           return res.redirect(`/login?message=incorrect userName/password`);
@@ -39,15 +39,15 @@ class Controller {
       }
     }
   }
-  static logout(req, res){
-    req.session.destroy((error)=>{
+  static logout(req, res) {
+    req.session.destroy((error) => {
       if (error) {
-        console.log(error)
-        res.send(error.message)
+        console.log(error);
+        res.send(error.message);
       } else {
-        res.redirect('/login')
+        res.redirect("/login");
       }
-    })
+    });
   }
   static register(req, res) {
     try {
@@ -80,25 +80,26 @@ class Controller {
   static async profile(req, res) {
     try {
       const data = await Profile.findOne({
-        where: {UserId: req.session.userId}
-      })
-      res.render("profileForm", {data, formatDate});
-    } catch (error) {
-      
-    }
+        where: { UserId: req.session.userId },
+      });
+      res.render("profileForm", { data, formatDate });
+    } catch (error) {}
   }
 
   static async postProfile(req, res) {
     const { userId } = req.session;
-    const { name, gender, dateOfBirth} = req.body
+    const { name, gender, dateOfBirth } = req.body;
     try {
       const user = await Profile.findOne({
-        where: {UserId: userId}
-      })
+        where: { UserId: userId },
+      });
       if (user) {
-        await Profile.update({name, gender, dateOfBirth}, {where: {UserId: userId}})
+        await Profile.update(
+          { name, gender, dateOfBirth },
+          { where: { UserId: userId } }
+        );
       } else {
-        await Profile.create({name, gender, dateOfBirth, UserId: userId})
+        await Profile.create({ name, gender, dateOfBirth, UserId: userId });
       }
       res.redirect(`/profile/${userId}`);
     } catch (error) {
@@ -111,11 +112,10 @@ class Controller {
     try {
       // const posts = await Post.findAll();
       const posts = await Post.findAll({
-        include: [{ model: Tag }, { model: User }],
+        include: [User, Tag],
       });
-      // console.log(posts);
       // res.send(posts);
-      res.render("post", { posts });
+      res.render("post", { posts, time });
     } catch (error) {
       console.log(error);
       res.send(error.message);
@@ -139,11 +139,12 @@ class Controller {
   static async savePost(req, res) {
     const { userId } = req.params;
     try {
-      const { title, content, tagId } = req.body;
-      await Post.creat({
+      const { title, content, imgUrl } = req.body;
+      await Post.create({
         title,
         content,
-        tagId,
+        imgUrl,
+        UserId: userId,
       });
       res.redirect(`/posts`);
     } catch (error) {
