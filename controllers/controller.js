@@ -110,11 +110,10 @@ class Controller {
 
   static async post(req, res) {
     try {
-      // const posts = await Post.findAll();
       const posts = await Post.findAll({
         include: [User, Tag],
+        order: [['updatedAt', 'DESC']]
       });
-      // res.send(posts);
       res.render("post", { posts, time });
     } catch (error) {
       console.log(error);
@@ -129,7 +128,6 @@ class Controller {
       const post = await Post.findAll();
 
       res.render("addPost", { user, post });
-      // res.send(user);
     } catch (error) {
       console.log(error);
       res.send(error.message);
