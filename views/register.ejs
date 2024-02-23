@@ -3,25 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<<<<<<< HEAD
+    <link rel="stylesheet" href="style.css" />
     <title>PP</title>
   </head>
   <body>
     <h1>Register</h1>
-    <div style="display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center">
       <% if (message) { %>
-        <p style="color: brown;"> <%= message %> </p>
-       <% } %>
+      <p style="color: brown"><%= message %></p>
+      <% } %>
     </div>
     <form method="post">
-      <section class="vh-100" style="background-color: #508bfc">
+      <section class="vh-100">
         <div class="container py-5 h-100">
           <div
             class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
               <div class="card shadow-2-strong" style="border-radius: 1rem">
                 <div class="card-body p-5 text-center">
-                  <h3 class="mb-5">Register</h3>
+                  <!-- <h3 class="mb-5">Register</h3> -->
 
                   <div class="form-outline mb-4">
                     <input
@@ -32,57 +32,23 @@
                       class="form-control form-control-lg" />
                     <label class="form-label" for="username">Username</label>
                   </div>
-                  
+
                   <div class="form-outline mb-4">
                     <input
                       required
                       type="email"
                       id="email"
                       name="email"
-=======
-    <link rel="stylesheet" href="style.css" />
-    <title>PP</title>
-  </head>
-  <body>
-    <h1>Login</h1>
-
-    <form method="post" class="vh-100">
-      <section>
-        <div class="container py-5">
-          <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card">
-                <div class="card-body">
-                  <!-- <h3 class="mb-5">Sign in</h3> -->
-
-                  <div class="form-outline mb-4">
-                    <input
-                      type="text"
-                      id="username"
-                      class="form-control form-control-lg" />
-                    <label class="form-label" for="username">Username</label>
-                  </div>
-
-                  <div class="form-outline mb-4">
-                    <input
-                      type="text"
-                      id="email"
->>>>>>> c589a25 (correct models dll)
                       class="form-control form-control-lg" />
                     <label class="form-label" for="email">Email</label>
                   </div>
 
                   <div class="form-outline mb-4">
                     <input
-<<<<<<< HEAD
                       required
                       type="password"
                       id="typePasswordX-2"
                       name="password"
-=======
-                      type="password"
-                      id="typePasswordX-2"
->>>>>>> c589a25 (correct models dll)
                       class="form-control form-control-lg" />
                     <label class="form-label" for="typePasswordX-2"
                       >Password</label
@@ -92,15 +58,8 @@
                   <button
                     class="btn btn-primary btn-lg btn-block"
                     type="submit">
-<<<<<<< HEAD
                     Register
                   </button>
-
-                  <hr class="my-4" />
-=======
-                    Login
-                  </button>
->>>>>>> c589a25 (correct models dll)
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
 "use strict";
 
-const { User, Post } = require("../models");
+const { User, Post, Tag } = require("../models");
+const { time } = require("../helpers/formatter");
 const bcrypt = require("bcryptjs");
 
 class Controller {
@@ -84,11 +85,10 @@ class Controller {
     try {
       // const posts = await Post.findAll();
       const posts = await Post.findAll({
-        include: [{ model: Tag }, { model: User }],
+        include: [User, Tag],
       });
-      // console.log(posts);
       // res.send(posts);
-      res.render("post", { posts });
+      res.render("post", { posts, time });
     } catch (error) {
       console.log(error);
       res.send(error.message);
@@ -112,11 +112,12 @@ class Controller {
   static async savePost(req, res) {
     const { userId } = req.params;
     try {
-      const { title, content, tagId } = req.body;
-      await Post.creat({
+      const { title, content, imgUrl } = req.body;
+      await Post.create({
         title,
         content,
-        tagId,
+        imgUrl,
+        UserId: userId,
       });
       res.redirect(`/posts`);
     } catch (error) {
