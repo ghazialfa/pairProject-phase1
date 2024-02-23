@@ -48,6 +48,18 @@
                         <% } %>
                     </select>
                   </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="typePasswordX-2"
+                      >Date of Birth</label
+                    >
+                    <input
+                      type="date"
+                      id="dateOfBirth"
+                      name="dateOfBirth"
+                      class="form-control form-control-lg"
+                      value="<%= data.dateOfBirth? formatDate(data.dateOfBirth): ''%>"
+                      />
+                  </div>
 
                   <button
                     class="btn btn-primary btn-lg btn-block"

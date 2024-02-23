@@ -1,6 +1,7 @@
 "use strict";
 
 const { User, Post, Tag, Profile } = require("../models");
+const {formatDate} = require('../helpers/formatter')
 const bcrypt = require("bcryptjs");
 
 class Controller {
@@ -81,7 +82,7 @@ class Controller {
       const data = await Profile.findOne({
         where: {UserId: req.session.userId}
       })
-      res.render("profileForm", {data});
+      res.render("profileForm", {data, formatDate});
     } catch (error) {
       
     }
@@ -89,16 +90,15 @@ class Controller {
 
   static async postProfile(req, res) {
     const { userId } = req.session;
-    const { name, gender} = req.body
-    console.log(name, gender, userId)
+    const { name, gender, dateOfBirth} = req.body
     try {
       const user = await Profile.findOne({
         where: {UserId: userId}
       })
       if (user) {
-        await Profile.update({name, gender}, {where: {UserId: userId}})
+        await Profile.update({name, gender, dateOfBirth}, {where: {UserId: userId}})
       } else {
-        await Profile.create({name, gender, UserId: userId})
+        await Profile.create({name, gender, dateOfBirth, UserId: userId})
       }
       res.redirect(`/profile/${userId}`);
     } catch (error) {
