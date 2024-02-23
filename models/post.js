@@ -3,9 +3,13 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     static associate(models) {
-      Post.belongsTo(models.User, { foreignKey: "UserId" });
-      Post.hasMany(models.PostTag, { foreignKey: "PostId" });
+      Post.belongsTo(models.User);
+      Post.hasMany(models.PostTag);
       Post.belongsToMany(models.Tag, { through: models.PostTag });
+    }
+
+    get time() {
+      return time(this.createdAt);
     }
   }
   Post.init(
