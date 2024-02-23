@@ -60,6 +60,18 @@
                       value="<%= data.dateOfBirth? formatDate(data.dateOfBirth): ''%>"
                       />
                   </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="typePasswordX-2"
+                      >Age</label
+                    >
+                    <input
+                      type="number"
+                      id="dateOfBirth"
+                      readonly
+                      class="form-control form-control-lg"
+                      value="<%= data.dateOfBirth? data.getUserAge() : '' %>"
+                      />
+                  </div>
 
                   <button
                     class="btn btn-primary btn-lg btn-block"
